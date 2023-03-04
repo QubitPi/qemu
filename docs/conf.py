@@ -58,6 +58,7 @@ except NameError:
 sys.path.insert(0, os.path.join(qemu_docdir, "sphinx"))
 sys.path.insert(0, os.path.join(qemu_docdir, "../scripts"))
 
+html_baseurl = '/qemu/'
 
 # -- General configuration ------------------------------------------------
 

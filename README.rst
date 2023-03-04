@@ -1,3 +1,55 @@
+========================================================================================
+Deploying `qemu <https://github.com/QubitPi/qemu>`_ (fork) `Documentation <https://qubitpi.github.io/qemu/>`_ to GitHub Pages
+========================================================================================
+
+`Activate <https://realpython.com/python-virtual-environments-a-primer/>`__ Python
+`virtual environment <https://realpython.com/intro-to-pyenv/>`__::
+
+    git clone git@github.com:QubitPi/qemu.git
+    cd qemu/
+    virtualenv -p python3.7.9 venv
+    source venv/bin/activate
+
+Build documentation::
+
+    sphinx-build -b html docs /path/to/generated/site
+
+**Turn the build into GitHub Pages deployable by adding an empty .nojekyll file into `/path/to/generated/site`**
+
+This fork publishes documentation site to `gh-pages branch <https://github.com/QubitPi/qemu/tree/gh-pages>`_ under root
+directory
+
+Note that the ``docs/conf.py`` has been modified by adding ``html_baseurl = '/qemu/'``
+
+Syncing `this Fork <https://github.com/QubitPi/qemu>`_ with `Upstream on GitLab <https://gitlab.com/qemu-project/qemu>`_
+========================================================================================
+
+**First of all, I hate GitLab, A LOT**
+
+Fork syncing between GitHub and GitLab throws an error like the following
+
+..  code-block:: bash
+
+    $ git pull upstream master -v
+    Looking up gitlab.com ... done.
+    Connecting to gitlab.com (port xxxx) ... xxx.xxx.xxx.xxx done.
+    fatal: read error: Connection reset by peer
+
+I never saw this embarrassing and stupid situation, so I decided to detach this fork completely from the upstream
+(although I DO still declare this repo to be a *fork* for clarification purpose).
+
+Code updates are checked-in to **origin/master** branch **manually** by downloading source code directly from
+`upstream <https://gitlab.com/qemu-project/qemu>`_:
+
+.. image:: syncing-code.png
+
+Next the ``publish-forked-documentation-site`` branch will **rebase** on top of `master` branch.
+
+Since the upstream uses "master" as default branch, this fork uses the **publish-forked-documentation-site** branch as
+the origin's default branch
+
+------------
+
 ===========
 QEMU README
 ===========
